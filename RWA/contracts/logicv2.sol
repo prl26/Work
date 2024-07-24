@@ -22,6 +22,7 @@ contract LogicV2 is Initializable, ERC20Upgradeable, OwnableUpgradeable, Pausabl
         _transferOwnership(initialOwner);
         initialInterestRate = InterestRate;
     }
+
     /**
     * ------------ 修飾器 ---------
     */
@@ -90,7 +91,6 @@ contract LogicV2 is Initializable, ERC20Upgradeable, OwnableUpgradeable, Pausabl
 
     // 根据地址余额和利率增发,需升级后触发
     function mintInterest(address to) external {
-        require(msg.sender == to, "must be yourself");
         require(isDisInterest[to] == false, "you've got the interest");
         isDisInterest[to] = true;
         uint256 balance = balanceOf(to);
